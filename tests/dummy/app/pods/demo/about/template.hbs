@@ -1,4 +1,6 @@
 {{!-- BEGIN-SNIPPET about-api }}
+  {{frost-modal-outlet}}
+
   {{frost-modal-about
     brandingStrip=(hash
       icon= // e.g. 'blueplanet-branding-strip'
@@ -25,14 +27,14 @@
 {{! BEGIN-SNIPPET about }}
 {{frost-modal-about
   brandingStrip=(hash
-    icon='branding-strip'
+    icon='company-strip'
     pack='dummy'
   )
   copyright=legalIpsum
   hook='about-dialog'
   isVisible=isAboutVisible
   logo=(hash
-    icon='logo'
+    icon='company'
     pack='dummy'
   )
   product=(hash
@@ -63,6 +65,7 @@
   </div>
   <div class='frost-modal-demo-launch'>
     {{frost-button
+      hook='launchButton'
       priority='primary'
       size='medium'
       text='Launch the modal'

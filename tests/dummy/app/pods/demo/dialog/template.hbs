@@ -1,4 +1,6 @@
 {{!-- BEGIN-SNIPPET dialog-api }}
+  {{frost-modal-outlet}}
+
   {{frost-modal-dialog
     params=(hash
       cancel=(hash
@@ -13,8 +15,7 @@
         bar= // e.g. props for 'foo'
       )
       icon=(hash
-        name= // e.g. 'warn'
-        pack= // e.g. 'frost-modal'
+        name= // e.g. 'warning'
       )
       links=(array
         (hash
@@ -41,8 +42,7 @@
       text='Basic content'
     )
     icon=(hash
-      name='warn'
-      pack='frost-modal'
+      name='warning'
     )
     links=(array
       (hash
@@ -59,37 +59,22 @@
 {{! END-SNIPPET }}
 
 <div class='frost-modal-demo-api'>
-  {{#frost-tabs onChange=(action (mut tab)) selection=tab}}
-    {{#frost-tab alias='Notes' id='notes'}}
-      <div class='frost-modal-demo-notes'>
-        <p>
-          \{{frost-modal-dialog}} provides a structured dialog for use as the modal
-          in a \{{frost-modal-binding}}
-          <ul>
-            <li>header - <b>icon, title</b></li>
-            <li>scrollable content area - <b>summary, content component</b></li>
-            <li>footer - <b>cancel, confirm, links</b>
-              <i>(with proper transition behavior)</i>
-            </li>
-          </ul>
-        </p>
-        <p>
-          While \{{frost-modal-dialog}} can be called directly, the primary
-          usage is via shim components that provide more specific
-          use cases and reduce boilerplate.
-        </p>
-        <p>
-          The rest of the components listed under the <i>Dialog components</i>
-          provide shims around the \{{frost-modal-binding}} / \{{frost-modal-dialog}}
-          combination.
-        </p>
-      </div>
-    {{/frost-tab}}
-    {{#frost-tab alias='API' id='api'}}
-      <div class='frost-modal-demo-snippet'>
-        {{code-snippet name='dialog-api.hbs'}}
-      </div>
-    {{/frost-tab}}
+  {{#frost-tabs
+    hook='tabs'
+    onChange=(action (mut tab))
+    selectedTab=tab
+     as |controls|
+  }}
+    {{controls.tab
+      text='Notes'
+      id='notes'
+      content=(component 'demo/dialog/components/dialog-description')
+    }}
+    {{controls.tab
+      text='API'
+      id='api'
+      content=(component 'demo/dialog/components/dialog-snippet')
+    }}
   {{/frost-tabs}}
 </div>
 <div class='frost-modal-demo-live'>
@@ -101,6 +86,7 @@
   </div>
   <div class='frost-modal-demo-launch'>
     {{frost-button
+      hook='launchButton'
       priority='primary'
       size='medium'
       text='Launch the modal'

@@ -1,29 +1,23 @@
-import { expect } from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
+import {expect} from 'chai'
+import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
+import {describe, it} from 'mocha'
 
-describeComponent(
-  'frost-modal-dialog',
-  'Integration: FrostModalDialogComponent',
-  {
-    integration: true
-  },
-  function () {
-    it('renders', function () {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#frost-modal-dialog}}
-      //     template content
-      //   {{/frost-modal-dialog}}
-      // `);
+const test = integration('frost-modal-dialog')
+describe(test.label, function () {
+  test.setup()
 
-      this.render(hbs`{{frost-modal-dialog}}`)
-      expect(this.$()).to.have.length(1)
-    })
-  }
-)
+  it('renders', function () {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    // this.render(hbs`
+    //   {{#frost-modal-dialog}}
+    //     template content
+    //   {{/frost-modal-dialog}}
+    // `);
+
+    this.render(hbs`{{frost-modal-dialog}}`)
+    expect(this.$()).to.have.length(1)
+  })
+})
