@@ -1,8 +1,7 @@
-import Ember from 'ember'
-const { assign } = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
+import {about} from '../../helpers/frost-modal-animation'
 import FrostModalBinding from '../frost-modal-binding'
-import { about } from '../../helpers/frost-modal-animation'
-import PropTypesMixin, { PropTypes } from 'ember-prop-types'
+import PropTypesMixin, {PropTypes} from 'ember-prop-types'
 
 export default FrostModalBinding.extend(PropTypesMixin, {
 
@@ -14,7 +13,11 @@ export default FrostModalBinding.extend(PropTypesMixin, {
       icon: PropTypes.string.isRequired,
       pack: PropTypes.string.isRequired
     }).isRequired,
-    copyright: PropTypes.string.isRequired,
+    // htmlSafe() doesn't return a string, so can't use string here for copyright (@job13er 2017-06-02)
+    copyright: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ]).isRequired,
     isVisible: PropTypes.bool.isRequired,
     logo: PropTypes.shape({
       icon: PropTypes.string.isRequired,
@@ -32,23 +35,25 @@ export default FrostModalBinding.extend(PropTypesMixin, {
   },
 
   getDefaultProps () {
-    let defaultProps = this._super()
-
-    assign(defaultProps, {
+    return {
       animation: about,
       classModifier: 'about',
       closeOnOutsideClick: true,
-      modal: 'frost-modal-about-dialog',
-      params: {
-        brandingStrip: this.brandingStrip,
-        copyright: this.copyright,
-        logo: this.logo,
-        product: this.product,
-        versions: this.versions
-      }
-    })
+      modal: 'frost-modal-about-dialog'
+    }
+  },
 
-    return defaultProps
+  // == Computed properties ===================================================
+  @readOnly
+  @computed()
+  params () {
+    return {
+      brandingStrip: this.brandingStrip,
+      copyright: this.copyright,
+      logo: this.logo,
+      product: this.product,
+      versions: this.versions
+    }
   }
 
 })

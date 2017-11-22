@@ -1,32 +1,44 @@
+/* eslint-env node */
+
 module.exports = function (environment) {
   var ENV = {
     modulePrefix: 'dummy',
     podModulePrefix: 'dummy/pods',
     environment: environment,
-    baseURL: '/',
+    rootURL: '/',
+    'ember-prop-types': {
+      throwErrors: true
+    },
     locationType: 'hash',
     EmberENV: {
-      FEATURES: {},
+      FEATURES: {
+        // Here you can enable experimental features on an ember canary build
+        // e.g. 'with-controller': true
+      },
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
+      },
       iconPacks: {
         inline: true
       }
     },
-    APP: {}
-  }
-
-  if (environment === 'development') {}
-
-  // BEGIN-SNIPPET config-no-animation
-  if (environment === 'test') {
-    ENV['frost-modal'] = {
-      'no-animation': true
+    APP: {
+      // Here you can pass flags/options to your application instance
+      // when it is created
     }
   }
-  // END-SNIPPET
+
+  if (environment === 'development') {
+    // ENV.APP.LOG_RESOLVER = true
+    // ENV.APP.LOG_ACTIVE_GENERATION = true
+    // ENV.APP.LOG_TRANSITIONS = true
+    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true
+    // ENV.APP.LOG_VIEW_LOOKUPS = true
+  }
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.baseURL = '/'
     ENV.locationType = 'none'
 
     // keep test console output quieter
@@ -34,10 +46,14 @@ module.exports = function (environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false
 
     ENV.APP.rootElement = '#ember-testing'
+
+    ENV['frost-modal'] = {
+      'no-animation': true
+    }
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/frost-modal'
+    ENV.rootURL = '/ember-frost-modal'
     ENV.isDemo = true
   }
 

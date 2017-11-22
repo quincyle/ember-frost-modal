@@ -1,13 +1,29 @@
 {{!-- BEGIN-SNIPPET form-api }}
+  {{frost-modal-outlet}}
+
   {{frost-modal-form
+    buttons=(array
+      (hash
+        disabled= // true
+        icon= // e.g. 'info'
+        onClick= // e.g. (action 'info')
+        pack= // e.g. 'frost'
+        priority= // ['primary', etc.]
+        text= // e.g. 'Foo'
+      )
+    )
     cancel=(hash
       isVisible= // (true)
       text= // ('Cancel')
     )
+    closeOnConfirm= // (true)
     confirm=(hash
+      disabled= // (false)
       isVisible=  // (true)
       text= // ('Confirm')
     )
+    footer= // e.g. 'Foo bar' or a component
+      (component 'frost-loading')
     form=(component 'frost-bunsen-form'
       bar= // e.g. props for 'foo'
     )
@@ -19,6 +35,7 @@
         text= // e.g. 'Foo'
       )
     )
+    subtitle= // e.g. 'Foo bar'
     targetOutlet= // ('modal')
     title= // Required
     onCancel= // e.g. (action 'foo')
@@ -29,6 +46,21 @@
 
 {{! BEGIN-SNIPPET form }}
 {{frost-modal-form
+  buttons=(array
+    (hash
+      icon='info'
+      onClick=(action 'info')
+      pack='frost'
+      priority='secondary'
+      text='Info'
+    )
+  )
+  classModifier='my-class'
+  closeOnConfirm=false
+  confirm=(hash
+    disabled=(not isSomethingReady)
+  )
+  footer='Foo bar'
   form=(component 'frost-bunsen-form'
     bunsenModel=simpleBunsenModel
     hook='bunsen-form'
@@ -37,9 +69,10 @@
   )
   hook='form-dialog'
   isVisible=isFormVisible
+  subtitle='Lemon squeezy'
   title='Easy peasy'
-  onClose=(action (mut isFormVisible) false)
-  onConfirm=(action 'notifyAndClear')
+  onClose=(action 'closeForm')
+  onConfirm=(action 'notifyClearAndClose')
 }}
 {{! END-SNIPPET }}
 
@@ -60,10 +93,11 @@
   </div>
   <div class='frost-modal-demo-launch'>
     {{frost-button
+      hook='launchButton'
       priority='primary'
       size='medium'
       text='Launch the modal'
-      onClick=(action (mut isFormVisible) true)
+      onClick=(action 'openForm')
     }}
   </div>
 </div>

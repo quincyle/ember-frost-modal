@@ -1,11 +1,9 @@
 import Ember from 'ember'
-const {
-  assign,
-  getWithDefault
-} = Ember
+const {getWithDefault} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
+import {message} from '../../../helpers/frost-modal-animation'
 import FrostModalBinding from '../../frost-modal-binding'
-import { message } from '../../../helpers/frost-modal-animation'
-import PropTypesMixin, { PropTypes } from 'ember-prop-types'
+import PropTypesMixin, {PropTypes} from 'ember-prop-types'
 
 export default FrostModalBinding.extend(PropTypesMixin, {
 
@@ -13,6 +11,7 @@ export default FrostModalBinding.extend(PropTypesMixin, {
 
   propTypes: {
     // Options
+    buttons: PropTypes.array,
     confirm: PropTypes.shape({
       isVisible: PropTypes.bool,
       text: PropTypes.string
@@ -21,8 +20,13 @@ export default FrostModalBinding.extend(PropTypesMixin, {
       PropTypes.object,
       PropTypes.EmberObject
     ]),
+    footer: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string
+    ]),
     isVisible: PropTypes.bool.isRequired,
     links: PropTypes.array,
+    subtitle: PropTypes.string,
     summary: PropTypes.string,
     targetOutlet: PropTypes.string,
     title: PropTypes.string.isRequired,
@@ -33,32 +37,38 @@ export default FrostModalBinding.extend(PropTypesMixin, {
   },
 
   getDefaultProps () {
-    let defaultProps = this._super()
-
-    assign(defaultProps, {
+    return {
       animation: message,
       classModifier: 'message',
-      modal: 'frost-modal-dialog',
-      params: {
-        cancel: {
-          isVisible: false
-        },
-        confirm: {
-          isVisible: getWithDefault(this, 'confirm.isVisible', true),
-          text: getWithDefault(this, 'confirm.text', 'Close')
-        },
-        content: this.details,
-        icon: {
-          name: 'error',
-          pack: 'frost-modal'
-        },
-        links: this.links,
-        summary: this.summary,
-        title: this.title
-      }
-    })
+      modal: 'frost-modal-dialog'
+    }
+  },
 
-    return defaultProps
+  // == Computed properties ===================================================
+
+  @readOnly
+  @computed()
+  params () {
+    return {
+      buttons: this.buttons,
+      cancel: {
+        isVisible: false
+      },
+      confirm: {
+        isVisible: getWithDefault(this, 'confirm.isVisible', true),
+        text: getWithDefault(this, 'confirm.text', 'Close')
+      },
+      content: this.details,
+      footer: this.footer,
+      icon: {
+        name: 'error',
+        pack: 'frost'
+      },
+      links: this.links,
+      subtitle: this.subtitle,
+      summary: this.summary,
+      title: this.title
+    }
   }
 
 })

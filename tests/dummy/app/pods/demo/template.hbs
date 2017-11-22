@@ -3,12 +3,15 @@
     <div class='frost-modal-demo-title'>
       Demos
     </div>
-    {{#frost-scroll class='frost-modal-demo-selectors'}}
+    {{#frost-scroll
+      class='frost-modal-demo-selectors'
+      hook='selectorScroll'
+    }}
       {{#link-to 'demo.overview'}}Overview{{/link-to}}
       <div class='frost-modal-demo-selector-title'>
         Building blocks
         {{#link-to 'demo.blur'}}Background blur{{/link-to}}
-        {{#link-to 'demo.remote-outlet'}}Remote outlet{{/link-to}}
+        {{#link-to 'demo.remote-outlet'}}Required remote outlet{{/link-to}}
         <div class='frost-modal-demo-selector-title'>
           Local binding
           {{#link-to 'demo.basic-binding'}}Basic{{/link-to}}
@@ -37,9 +40,16 @@
         Unique components
         {{#link-to 'demo.about'}}frost-modal-about{{/link-to}}
       </div>
+      <div class='frost-modal-demo-selector-title'>
+        Tests
+        {{#link-to 'demo.helpers'}}Helpers{{/link-to}}
+      </div>
     {{/frost-scroll}}
   </div>
-  {{#frost-scroll class='frost-modal-demo-example'}}
+  {{#frost-scroll
+    class='frost-modal-demo-example'
+    hook='exampleScroll'
+  }}
     {{outlet}}
   {{/frost-scroll}}
 </div>

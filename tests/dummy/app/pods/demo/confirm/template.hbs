@@ -1,5 +1,17 @@
 {{!-- BEGIN-SNIPPET confirm-api }}
+  {{frost-modal-outlet}}
+
   {{frost-modal-confirm-message
+    buttons=(array
+      (hash
+        disabled= // true
+        icon= // e.g. 'info'
+        onClick= // e.g. (action 'info')
+        pack= // e.g. 'frost'
+        priority= // ['primary', etc.]
+        text= // e.g. 'Foo'
+      )
+    )
     cancel=(hash
       isVisible= // (true)
       text= // ('Cancel')
@@ -11,6 +23,8 @@
     details=(component 'foo'
       bar= // e.g. props for 'foo'
     )
+    footer= // e.g. 'Foo bar' or a component
+      (component 'frost-loading')
     isVisible= // Required binding
     links=(array
       (hash
@@ -19,6 +33,7 @@
         text= // e.g. 'Foo'
       )
     )
+    subtitle= // e.g. 'Foo bar'
     summary= // [main message]
     targetOutlet= // ('modal')
     title= // Required
@@ -65,6 +80,7 @@
   </div>
   <div class='frost-modal-demo-launch'>
     {{frost-button
+      hook='launchButton'
       priority='primary'
       size='medium'
       text='Launch the modal'

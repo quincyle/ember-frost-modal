@@ -10,10 +10,10 @@
 [ember-observer-badge]: http://emberobserver.com/badges/ember-frost-modal.svg "Ember Observer score"
 [ember-observer-badge-url]: http://emberobserver.com/addons/ember-frost-modal
 
-[ember-img]: https://img.shields.io/badge/ember-1.12.2+-orange.svg "Ember 1.12.2+"
+[ember-img]: https://img.shields.io/badge/ember-2.3+-orange.svg "Ember 2.3+"
 
-[bithound-img]: https://www.bithound.io/github/ciena-blueplanet/ember-frost-modal/badges/score.svg "bitHound"
-[bithound-url]: https://www.bithound.io/github/ciena-blueplanet/ember-frost-modal
+[bithound-img]: https://www.bithound.io/github/ciena-frost/ember-frost-modal/badges/score.svg "bitHound"
+[bithound-url]: https://www.bithound.io/github/ciena-frost/ember-frost-modal
 
 # ember-frost-modal
 ###### Dependencies
@@ -43,7 +43,8 @@ Detailed API and example usage can be found in the sample application in `tests/
 
 ### Ember-elsewhere
 
-This addon uses the [ember-elsewhere](https://github.com/ef4/ember-elsewhere) to manage the modals, to lift them outside the normal route hiearchy.
+This addon uses the [ember-elsewhere](https://github.com/ef4/ember-elsewhere) to manage the modals, to
+lift them outside the normal route hiearchy.
 
 ### ember-perfectscroll effects (TODO effects based off perfectscroll events, but not from perfectscroll)
 
@@ -53,7 +54,9 @@ Styling includes: box shadow plus slight transparency in header/footer to reveal
 For more documentation on ember-perfectscroll:  [perfect-scrollbar](https://github.com/noraesae/perfect-scrollbar)
 
 ## Testing with ember-hook
-This addon has been optimized for use with [ember-hook](https://github.com/Ticketfly/ember-hook). You can set a `hook` name on your modal template. This will allow you to access the internal modal content for testing.
+This addon has been optimized for use with [ember-hook](https://github.com/Ticketfly/ember-hook). You
+can set a `hook` name on your modal template. This will allow you to access the internal modal content
+for testing.
 ### Available hooks (TODO move to documentation)
 * Modal dialog title - `<hook-name>-title`
 * Modal dialog header icon - `<hook-name>-icon`
@@ -75,6 +78,7 @@ npm install && bower install
 A dummy application for development is available under `ember-frost-modal/tests/dummy`.
 To run the server run `ember server` (or `npm start`) from the root of the repository and
 visit the app at http://localhost:4200.
+
 
 ### Testing
 Run `npm test` from the root of the project to run linting checks as well as execute the test suite
